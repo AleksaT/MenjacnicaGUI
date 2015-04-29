@@ -15,6 +15,15 @@ import java.awt.event.InputEvent;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+import javax.swing.JTextArea;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
 
@@ -30,6 +39,14 @@ public class GUI extends JFrame {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
+	private JScrollPane scrollPane_1;
+	private JTable table;
+	private JPopupMenu popupMenu;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
 
 	/**
 	 * Launch the application.
@@ -52,13 +69,15 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 580, 393);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.add(getPanel(), BorderLayout.EAST);
+		contentPane.add(getScrollPane(), BorderLayout.SOUTH);
+		contentPane.add(getScrollPane_1(), BorderLayout.CENTER);
 	}
 
 	private JMenuBar getMenuBar_1() {
@@ -127,19 +146,112 @@ public class GUI extends JFrame {
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("Dodaj kurs");
+			btnNewButton.setPreferredSize(new Dimension(100, 23));
 		}
 		return btnNewButton;
 	}
 	private JButton getBtnNewButton_1() {
 		if (btnNewButton_1 == null) {
 			btnNewButton_1 = new JButton("Obrisi kurs");
+			btnNewButton_1.setPreferredSize(new Dimension(100, 23));
 		}
 		return btnNewButton_1;
 	}
 	private JButton getBtnNewButton_2() {
 		if (btnNewButton_2 == null) {
 			btnNewButton_2 = new JButton("Izvrsi zamenu");
+			btnNewButton_2.setPreferredSize(new Dimension(100, 23));
 		}
 		return btnNewButton_2;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			scrollPane.setPreferredSize(new Dimension(2, 50));
+			scrollPane.setViewportView(getTextArea());
+		}
+		return scrollPane;
+	}
+	private JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+		}
+		return textArea;
+	}
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setViewportView(getTable());
+		}
+		return scrollPane_1;
+	}
+	private JTable getTable() {
+		if (table == null) {
+			table = new JTable();
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, "", ""},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+					{null, null, null, null, null, null},
+				},
+				new String[] {
+					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
+				}
+			));
+			addPopup(table, getPopupMenu());
+		}
+		return table;
+	}
+	private JPopupMenu getPopupMenu() {
+		if (popupMenu == null) {
+			popupMenu = new JPopupMenu();
+			popupMenu.add(getMntmNewMenuItem());
+			popupMenu.add(getMntmNewMenuItem_1());
+			popupMenu.add(getMntmNewMenuItem_2());
+		}
+		return popupMenu;
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	private JMenuItem getMntmNewMenuItem() {
+		if (mntmNewMenuItem == null) {
+			mntmNewMenuItem = new JMenuItem("Dodaj kurs");
+		}
+		return mntmNewMenuItem;
+	}
+	private JMenuItem getMntmNewMenuItem_1() {
+		if (mntmNewMenuItem_1 == null) {
+			mntmNewMenuItem_1 = new JMenuItem("Obrisi kurs");
+		}
+		return mntmNewMenuItem_1;
+	}
+	private JMenuItem getMntmNewMenuItem_2() {
+		if (mntmNewMenuItem_2 == null) {
+			mntmNewMenuItem_2 = new JMenuItem("Izvrsi zamenu");
+		}
+		return mntmNewMenuItem_2;
 	}
 }
