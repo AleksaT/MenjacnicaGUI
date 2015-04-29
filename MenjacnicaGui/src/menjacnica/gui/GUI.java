@@ -103,7 +103,14 @@ public class GUI extends JFrame {
 		contentPane.add(getScrollPane(), BorderLayout.SOUTH);
 		contentPane.add(getScrollPane_1(), BorderLayout.CENTER);
 	}
-
+    public void dodajStatus(String string){
+    	textArea.append(string);
+    }
+    public void prikaziDK(){
+    	DodajKursGUI DK = new DodajKursGUI(this);
+    	DK.setVisible(true);
+    };
+    
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
@@ -209,6 +216,12 @@ public class GUI extends JFrame {
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("Dodaj kurs");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziDK();
+					
+				}
+			});
 			btnNewButton.setPreferredSize(new Dimension(100, 23));
 		}
 		return btnNewButton;
@@ -254,7 +267,7 @@ public class GUI extends JFrame {
 			table = new JTable();
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
-					{null, null, null, null, "", ""},
+					{null, null, null, null, null, ""},
 					{null, null, null, null, null, null},
 					{null, null, null, null, null, null},
 					{null, null, null, null, null, null},
@@ -268,7 +281,20 @@ public class GUI extends JFrame {
 				new String[] {
 					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
 				}
-			));
+			) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+				Class[] columnTypes = new Class[] {
+					Integer.class, String.class, Double.class, Double.class, Double.class, String.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			table.getColumnModel().getColumn(1).setPreferredWidth(80);
+			table.getColumnModel().getColumn(1).setMinWidth(25);
 			addPopup(table, getPopupMenu());
 		}
 		return table;
@@ -302,6 +328,11 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmNewMenuItem() {
 		if (mntmNewMenuItem == null) {
 			mntmNewMenuItem = new JMenuItem("Dodaj kurs");
+			mntmNewMenuItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziDK();
+				}
+			});
 		}
 		return mntmNewMenuItem;
 	}
@@ -317,4 +348,6 @@ public class GUI extends JFrame {
 		}
 		return mntmNewMenuItem_2;
 	}
+	
 }
+
