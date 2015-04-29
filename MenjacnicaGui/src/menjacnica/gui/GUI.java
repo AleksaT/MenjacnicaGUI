@@ -1,5 +1,6 @@
 package menjacnica.gui;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -34,14 +35,19 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.event.MenuKeyListener;
-import javax.swing.event.MenuKeyEvent;
+
+
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 public class GUI extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JMenuBar menuBar;
 	private JMenu mnFile;
@@ -109,7 +115,12 @@ public class GUI extends JFrame {
     public void prikaziDK(){
     	DodajKursGUI DK = new DodajKursGUI(this);
     	DK.setVisible(true);
-    };
+    }
+    public void prikaziOK() {
+		ObrisiKursGUI OK = new ObrisiKursGUI(this);
+		OK.setVisible(true);
+	}
+    ;
     
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
@@ -339,6 +350,11 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmNewMenuItem_1() {
 		if (mntmNewMenuItem_1 == null) {
 			mntmNewMenuItem_1 = new JMenuItem("Obrisi kurs");
+			mntmNewMenuItem_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				prikaziOK();	
+				}
+			});
 		}
 		return mntmNewMenuItem_1;
 	}
