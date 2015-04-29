@@ -112,7 +112,7 @@ public class GUI extends JFrame {
     public void dodajStatus(String string){
     	textArea.append(string);
     }
-    public void prikaziDK(){
+    public void prikaziDK() {
     	DodajKursGUI DK = new DodajKursGUI(this);
     	DK.setVisible(true);
     }
@@ -120,6 +120,10 @@ public class GUI extends JFrame {
 		ObrisiKursGUI OK = new ObrisiKursGUI(this);
 		OK.setVisible(true);
 	}
+    public void prikaziZK() {
+    	IzvrsiZamenuGUI ZK = new IzvrsiZamenuGUI();
+    	ZK.setVisible(true);
+    }
     ;
     
 	private JMenuBar getMenuBar_1() {
@@ -217,7 +221,7 @@ public class GUI extends JFrame {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-			panel.setPreferredSize(new Dimension(100, 10));
+			panel.setPreferredSize(new Dimension(130, 10));
 			panel.add(getBtnNewButton());
 			panel.add(getBtnNewButton_1());
 			panel.add(getBtnNewButton_2());
@@ -233,21 +237,31 @@ public class GUI extends JFrame {
 					
 				}
 			});
-			btnNewButton.setPreferredSize(new Dimension(100, 23));
+			btnNewButton.setPreferredSize(new Dimension(130, 23));
 		}
 		return btnNewButton;
 	}
 	private JButton getBtnNewButton_1() {
 		if (btnNewButton_1 == null) {
 			btnNewButton_1 = new JButton("Obrisi kurs");
-			btnNewButton_1.setPreferredSize(new Dimension(100, 23));
+			btnNewButton_1.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziOK();
+				}
+			});
+			btnNewButton_1.setPreferredSize(new Dimension(130, 23));
 		}
 		return btnNewButton_1;
 	}
 	private JButton getBtnNewButton_2() {
 		if (btnNewButton_2 == null) {
 			btnNewButton_2 = new JButton("Izvrsi zamenu");
-			btnNewButton_2.setPreferredSize(new Dimension(100, 23));
+			btnNewButton_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziZK();
+				}
+			});
+			btnNewButton_2.setPreferredSize(new Dimension(130, 23));
 		}
 		return btnNewButton_2;
 	}
@@ -292,19 +306,8 @@ public class GUI extends JFrame {
 				new String[] {
 					"Sifra", "Skraceni naziv", "Prodajni", "Srednji", "Kupovni", "Naziv"
 				}
-			) {
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-				Class[] columnTypes = new Class[] {
-					Integer.class, String.class, Double.class, Double.class, Double.class, String.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			});
-			table.getColumnModel().getColumn(1).setPreferredWidth(80);
+			));
+			table.getColumnModel().getColumn(1).setPreferredWidth(95);
 			table.getColumnModel().getColumn(1).setMinWidth(25);
 			addPopup(table, getPopupMenu());
 		}
@@ -361,6 +364,11 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmNewMenuItem_2() {
 		if (mntmNewMenuItem_2 == null) {
 			mntmNewMenuItem_2 = new JMenuItem("Izvrsi zamenu");
+			mntmNewMenuItem_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					prikaziZK();
+				}
+			});
 		}
 		return mntmNewMenuItem_2;
 	}
