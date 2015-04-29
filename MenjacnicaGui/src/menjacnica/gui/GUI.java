@@ -6,14 +6,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
+
 import javax.swing.ImageIcon;
+
 import java.awt.Dimension;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
@@ -21,9 +27,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPopupMenu;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.event.MenuKeyListener;
+import javax.swing.event.MenuKeyEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class GUI extends JFrame {
 
@@ -47,6 +62,7 @@ public class GUI extends JFrame {
 	private JMenuItem mntmNewMenuItem;
 	private JMenuItem mntmNewMenuItem_1;
 	private JMenuItem mntmNewMenuItem_2;
+	protected Object File;
 
 	/**
 	 * Launch the application.
@@ -68,7 +84,15 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Menjacnica");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/icons/1430326007_vector_65_04-128.png")));
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent arg0) {
+				int opcija =JOptionPane.showConfirmDialog(contentPane, "Da li zelite da izadjete iz programa", "",JOptionPane.YES_NO_CANCEL_OPTION);
+				if (opcija==JOptionPane.YES_OPTION) System.exit(0);
+			}
+		});
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 580, 393);
 		setJMenuBar(getMenuBar_1());
 		contentPane = new JPanel();
@@ -107,6 +131,17 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmOpen() {
 		if (mntmOpen == null) {
 			mntmOpen = new JMenuItem("Open");
+			mntmOpen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					 JFileChooser fc = new JFileChooser();
+						int value = fc.showOpenDialog(contentPane);
+						if (value == JFileChooser.APPROVE_OPTION) {
+							File file = fc.getSelectedFile();
+							
+							textArea.append("Unet je fajl: "+file.getName()+". Putanja fajla: "+file.getAbsolutePath()+ '\n');
+				}
+				}});
+			;
 			mntmOpen.setIcon(new ImageIcon(GUI.class.getResource("/icons/1430327918_open-file.png")));
 			mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
 		}
@@ -115,6 +150,15 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmSave() {
 		if (mntmSave == null) {
 			mntmSave = new JMenuItem("Save");
+			mntmSave.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JFileChooser fc = new JFileChooser();
+					int returnVal = fc.showSaveDialog(contentPane);
+					if (returnVal == JFileChooser.APPROVE_OPTION){
+					 File file = fc.getSelectedFile();
+					 textArea.append("Sacuvan fajl"+file.getName()+" gde "+file.getAbsolutePath()+ '\n');
+					}}
+			});
 			mntmSave.setIcon(new ImageIcon(GUI.class.getResource("/icons/1430327936_floppy-32.png")));
 			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 		}
@@ -123,13 +167,32 @@ public class GUI extends JFrame {
 	private JMenuItem getMntmExit() {
 		if (mntmExit == null) {
 			mntmExit = new JMenuItem("Exit");
+			
+			mntmExit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					int opcija = JOptionPane.showConfirmDialog(contentPane,
+							 "Da li zelite da izadjete iz programa", "Izlaz",
+							 JOptionPane.YES_NO_CANCEL_OPTION);
+					if(opcija==JOptionPane.YES_OPTION) System.exit(0);
+				}
+			});
+			
 			mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.ALT_MASK));
 		}
 		return mntmExit;
 	}
 	private JMenuItem getMntmAbout() {
 		if (mntmAbout == null) {
+			
 			mntmAbout = new JMenuItem("About");
+			mntmAbout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JOptionPane.showMessageDialog(contentPane,
+							 "Autor : Aleksa Topalovic", "O programu", JOptionPane.INFORMATION_MESSAGE);
+				}
+			});
+			
+			;
 		}
 		return mntmAbout;
 	}
