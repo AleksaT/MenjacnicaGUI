@@ -40,6 +40,7 @@ import java.awt.event.WindowEvent;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.geom.GeneralPath;
 import java.awt.Toolkit;
 
 public class GUI extends JFrame {
@@ -61,7 +62,7 @@ public class GUI extends JFrame {
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private JScrollPane scrollPane;
-	private JTextArea textArea;
+	private  JTextArea textArea;
 	private JScrollPane scrollPane_1;
 	private JTable table;
 	private JPopupMenu popupMenu;
@@ -111,6 +112,9 @@ public class GUI extends JFrame {
 	}
     public void dodajStatus(String string){
     	textArea.append(string);
+    	
+    	
+    	
     }
     public void prikaziDK() {
     	DodajKursGUI DK = new DodajKursGUI(this);

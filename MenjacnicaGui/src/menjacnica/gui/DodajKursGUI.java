@@ -35,7 +35,7 @@ public class DodajKursGUI extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	public GUI  GP;
+	public  GUI GP;
 
 	/**
 	 * Create the frame.
@@ -68,6 +68,7 @@ public class DodajKursGUI extends JFrame {
 		contentPane.add(getTextField_3());
 		contentPane.add(getTextField_4());
 		contentPane.add(getTextField_5());
+		this.GP = GP;
 	}
 
 	private JLabel getLblSifra() {
@@ -117,7 +118,7 @@ public class DodajKursGUI extends JFrame {
 			btnNewButton = new JButton("Dodaj kurs");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int sifra = Integer.parseInt(textField.getText());
+					String sifra = textField.getText();
 					String skraceniN = textField_1.getText();
 					double prodajni = Double.parseDouble(textField_2.getText());
 					double srednji = Double.parseDouble(textField_3.getText());

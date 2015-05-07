@@ -74,6 +74,7 @@ public class ObrisiKursGUI extends JFrame {
 		contentPane.add(getChckbxNewCheckBox());
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getBtnNewButton_1());
+		this.GP = GP;
 	}
 
 	private JLabel getLblNewLabel() {
@@ -189,14 +190,19 @@ public class ObrisiKursGUI extends JFrame {
 			btnNewButton = new JButton("Obrisi");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					int sifra = Integer.parseInt(textField.getText());
-					String skraceniN = textField_1.getText();
-					double prodajni = Double.parseDouble(textField_2.getText());
-					double srednji = Double.parseDouble(textField_3.getText());
-					double kupovni = Double.parseDouble(textField_4.getText());
-					String naziv = textField_5.getText();
-					String string = "Sifra:"+sifra+"Skraceni naziv kursa: "+skraceniN+"Prodajni kurs: "+prodajni+"Kupovni kurs: "+kupovni+"Srednji kurs: "+srednji+"Naziv kursa: "+naziv;
-					GP.dodajStatus(string);
+					try {
+						String sifra = textField.getText();
+						String skraceniN = textField_1.getText();
+						double prodajni = Double.parseDouble(textField_2.getText());
+						double srednji = Double.parseDouble(textField_3.getText());
+						double kupovni = Double.parseDouble(textField_4.getText());
+						String naziv = textField_5.getText();
+						String string = "Sifra:"+sifra+"Skraceni naziv kursa: "+skraceniN+"Prodajni kurs: "+prodajni+"Kupovni kurs: "+kupovni+"Srednji kurs: "+srednji+"Naziv kursa: "+naziv;
+						GP.dodajStatus(string);
+					} catch (NumberFormatException e) {
+						GP.dodajStatus("Nije izabran nijedan kurs. Polja su prazna");
+						e.printStackTrace();
+					}
 				}
 			});
 			btnNewButton.setEnabled(false);
