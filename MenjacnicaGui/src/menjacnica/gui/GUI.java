@@ -125,7 +125,7 @@ public class GUI extends JFrame {
 		OK.setVisible(true);
 	}
     public void prikaziZK() {
-    	IzvrsiZamenuGUI ZK = new IzvrsiZamenuGUI();
+    	IzvrsiZamenuGUI ZK = new IzvrsiZamenuGUI(this);
     	ZK.setVisible(true);
     }
     ;

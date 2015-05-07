@@ -54,7 +54,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public IzvrsiZamenuGUI() {
+	public IzvrsiZamenuGUI(GUI GP) {
 		setTitle("Izvrsi zamenu");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -77,6 +77,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 		contentPane.add(getSlider());
 		contentPane.add(getBtnNewButton());
 		contentPane.add(getBtnNewButton_1());
+		this.GP = GP;
 	}
 
 	private JLabel getLblNewLabel() {
@@ -187,7 +188,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					String valuta = (String) comboBox.getSelectedItem();
 					String iznos = textField_2.getText();
-					String akcija= null;
+					String akcija= "";
 					if(rdbtnNewRadioButton.isSelected()) akcija = "kupovina";
 					if(rdbtnNewRadioButton_1.isSelected()) akcija = "prodaja";
 					String string = "Valuta: "+valuta+"Iznos :"+iznos+" "+akcija;
