@@ -120,14 +120,17 @@ public class DodajKursGUI extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					String sifra = textField.getText();
 					String skraceniN = textField_1.getText();
-					double prodajni = Double.parseDouble(textField_2.getText());
-					double srednji = Double.parseDouble(textField_3.getText());
-					double kupovni = Double.parseDouble(textField_4.getText());
+					String prodajni = textField_2.getText();
+					String srednji = textField_3.getText();
+					String kupovni = textField_4.getText();
 					String naziv = textField_5.getText();
 					String string = "Sifra:"+sifra+"Skraceni naziv kursa: "+skraceniN+"Prodajni kurs: "+prodajni+"Kupovni kurs: "+kupovni+"Srednji kurs: "+srednji+"Naziv kursa: "+naziv;
 					GP.dodajStatus(string);
+					dispose();
 				}
-			});
+				
+			}
+			);
 			btnNewButton.setBounds(10, 201, 103, 23);
 		}
 		return btnNewButton;

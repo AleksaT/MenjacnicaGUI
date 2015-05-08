@@ -199,6 +199,7 @@ public class ObrisiKursGUI extends JFrame {
 						String naziv = textField_5.getText();
 						String string = "Sifra:"+sifra+"Skraceni naziv kursa: "+skraceniN+"Prodajni kurs: "+prodajni+"Kupovni kurs: "+kupovni+"Srednji kurs: "+srednji+"Naziv kursa: "+naziv;
 						GP.dodajStatus(string);
+						dispose();
 					} catch (NumberFormatException e) {
 						GP.dodajStatus("Nije izabran nijedan kurs. Polja su prazna");
 						e.printStackTrace();

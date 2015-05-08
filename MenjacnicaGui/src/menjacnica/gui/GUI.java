@@ -273,7 +273,7 @@ public class GUI extends JFrame {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
 			scrollPane.setBorder(new TitledBorder(null, "Status", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			scrollPane.setPreferredSize(new Dimension(2, 50));
+			scrollPane.setPreferredSize(new Dimension(2, 100));
 			scrollPane.setViewportView(getTextArea());
 		}
 		return scrollPane;

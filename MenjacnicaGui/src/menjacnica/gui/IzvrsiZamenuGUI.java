@@ -193,6 +193,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 					if(rdbtnNewRadioButton_1.isSelected()) akcija = "prodaja";
 					String string = "Valuta: "+valuta+"Iznos :"+iznos+" "+akcija;
 					GP.dodajStatus(string);
+					dispose();
 					
 				}
 			});
